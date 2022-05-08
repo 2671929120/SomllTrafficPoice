@@ -46,7 +46,7 @@ public class TrafficPolice : MonoBehaviour
         {
             CarManager.Instance.EastMiddleStopEventStart();
         }
-        
+        //这里面还需要添加对应的动画信息
     } 
     public void EastLeftMove()
     {
