@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     public int SouthMiddleListCount = 10;
 
     public int GameSouce =0;
-
+    public bool CanTouch = true;
     public void AddGameSouce(int num)
     {
         GameSouce += num;

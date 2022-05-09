@@ -7,6 +7,7 @@ public class PlayerClick : MonoBehaviour
     // Start is called before the first frame update
     public Shader shaderRed;
     public Shader shaderGreen;
+    public bool canTouch;//判断是否可以触摸
     void Start()
     {
         
@@ -15,7 +16,7 @@ public class PlayerClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&& GameManager.Instance.CanTouch)
         {
             //射线检测
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -24,7 +25,6 @@ public class PlayerClick : MonoBehaviour
             {
                 if (hit.collider.tag == "letgo")
                 {
-
                      TriggerCar(hit.collider.name);
                     if (hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader == shaderRed)
                     {
@@ -44,46 +44,78 @@ public class PlayerClick : MonoBehaviour
         if(goname == "eastLeft")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.EASTLEFTMOVE);
-        }if(goname == "eastMidden")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if(goname == "eastMidden")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.EASTMIDDENMOVE);
-        }if(goname == "eastRight")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "eastRight")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.EASTRIGHTMOVE);
-        } 
-        
-        
-        if(goname == "westLeft")
+            GameManager.Instance.CanTouch = false;
+
+        }
+
+
+        if (goname == "westLeft")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.WESTLEFTMOVE);
-        }if(goname == "westMidden")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "westMidden")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.WESTMIDDENMOVE);
-        }if(goname == "westRight")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "westRight")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.WESTRIGHTMOVE);
+            GameManager.Instance.CanTouch = false;
+
         }
-        
-        if(goname == "northLeft")
+
+        if (goname == "northLeft")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.NORTHLEFTMOVE);
-        }if(goname == "northMidden")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "northMidden")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.NORTHMIDDENMOVE);
-        }if(goname == "northRight")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "northRight")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.NORTHRIGHTMOVE);
-        } 
-        
-        if(goname == "southLeft")
+            GameManager.Instance.CanTouch = false;
+
+        }
+
+        if (goname == "southLeft")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.SOUTHLEFTMOVE);
-        }if(goname == "southMidden")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "southMidden")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.SOUTHMIDDENMOVE);
-        }if(goname == "southRight")
+            GameManager.Instance.CanTouch = false;
+
+        }
+        if (goname == "southRight")
         {
             EventManager.Instance.TriggerEvent(ClientEvent.SOUTHRIGHTMOVE);
+            GameManager.Instance.CanTouch = false;
+
         }
     }
 }

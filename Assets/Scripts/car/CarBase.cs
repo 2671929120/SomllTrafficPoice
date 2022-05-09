@@ -55,7 +55,7 @@ public class CarBase : MonoBehaviour
                     case 0:
                         {
                             //直行
-                            Debug.Log("类型" + carType + "的汽车在直行");
+                           // Debug.Log("类型" + carType + "的汽车在直行");
                             transform.Translate(Vector3.forward * Time.deltaTime * Speed);
                             break;
                         }
@@ -69,13 +69,13 @@ public class CarBase : MonoBehaviour
                                 transform.Rotate(Vector3.up * Time.deltaTime * RightAngle);
                             }
                          
-                            Debug.Log("类型" + carType + "的汽车在右转");
+                           // Debug.Log("类型" + carType + "的汽车在右转");
                             break;
                         }
                     case 2:
                         {
                             //左转
-                            Debug.Log("类型" + carType + "的汽车在左转");
+                           // Debug.Log("类型" + carType + "的汽车在左转");
                             transform.Translate(Vector3.forward * Time.deltaTime * Speed);
                             if (T < 90)
                             {

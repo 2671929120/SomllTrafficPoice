@@ -17,7 +17,7 @@ public class CameraViewChange : MonoBehaviour
     }
     public Camera camera;
     private camereStatus status;
-    public GameObject down;
+    public GameObject Palyer;
 
     //保存之前的位置和角度
     private Vector3 lastPos;
@@ -40,9 +40,9 @@ public class CameraViewChange : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 float mouseX = Input.GetAxis("Mouse X") * 10;
-               // Debug.Log("旋转视角" + mouseX);
-                //  down.transform.Rotate(new Vector3(0,mouseX,0),Space.Self);
-                this.transform.RotateAround(down.transform.position, transform.up, mouseX);
+                Debug.Log("旋转视角" + mouseX);
+                Palyer.transform.Rotate(new Vector3(0,mouseX,0),Space.Self);
+                this.transform.RotateAround(Palyer.transform.position, transform.up, mouseX);
             }
         }
     }

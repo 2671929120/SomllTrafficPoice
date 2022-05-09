@@ -18,9 +18,17 @@ public class TrafficPolice : MonoBehaviour
     public GameObject WiteSouthMiddle;
 
     public Animator animatorPlayer;
+    public GameObject TafficPoliceMan;
 
-    
-     void Start()
+    private bool isNeed;
+    private Vector3 changeAngle;
+    private string animName;
+
+
+    public delegate void MoveDele();
+    public event MoveDele MoveEvent;
+    public bool zuijin;
+    void Start()
     {
         EventManager.Instance.AddEvent(ClientEvent.WESTMIDDENMOVE, WestMiddenMove);
         EventManager.Instance.AddEvent(ClientEvent.WESTLEFTMOVE, WestLeftMove);
@@ -34,6 +42,52 @@ public class TrafficPolice : MonoBehaviour
         EventManager.Instance.AddEvent(ClientEvent.NORTHMIDDENMOVE, NorthMiddenMove);
         EventManager.Instance.AddEvent(ClientEvent.NORTHLEFTMOVE, NorthLeftMove);
         EventManager.Instance.AddEvent(ClientEvent.NORTHRIGHTMOVE, NorthRightMove);
+
+        changeAngle = Vector3.zero;
+        isNeed = false;
+    }
+
+    
+    
+    private void Update()
+    {
+        if (isNeed)
+        {
+            if (Mathf.Abs(TafficPoliceMan.transform.localEulerAngles.y - changeAngle.y )> 4f)
+            {
+                if(changeAngle.y - TafficPoliceMan.transform.localEulerAngles.y > 0)
+                {
+                    TafficPoliceMan.transform.localEulerAngles = TafficPoliceMan.transform.localEulerAngles + Vector3.up * Time.deltaTime * 200;
+                }
+                else
+                {
+                    TafficPoliceMan.transform.localEulerAngles = TafficPoliceMan.transform.localEulerAngles - Vector3.up * Time.deltaTime * 200;
+                }
+            }
+            else
+            {
+                isNeed = false;
+                TriggerAnim();
+            }
+        }
+    }
+   
+    public void TriggerAnim()
+    {
+        if(animName!= null)
+        {
+            animatorPlayer.SetTrigger(animName);
+            //执行回调
+            //MoveEvent?.Invoke();
+            GameManager.Instance.CanTouch = true;
+            //MoveEvent = null;
+        }
+    }
+    public void StopAnim(float angle)
+    {
+        changeAngle.y = angle;
+        isNeed = true;
+        animName = "stop";
     }
     public void EastMiddenMove()
     {
@@ -41,13 +95,18 @@ public class TrafficPolice : MonoBehaviour
         if (!WiteEastMiddle.activeSelf)
         {
             CarManager.Instance.EastMiddleMoveEventStart();
+            //这里面还需要添加对应的动画信息
+            //只需要知道一个偏移位置就行别的无所谓
+            changeAngle = new Vector3(0, 0, 0);
+            isNeed = true;
+            animName = "go";
         }
         else
         {
             CarManager.Instance.EastMiddleStopEventStart();
+            StopAnim(90);
         }
-        //这里面还需要添加对应的动画信息
-        //
+      
     } 
     public void EastLeftMove()
     {
@@ -55,10 +114,14 @@ public class TrafficPolice : MonoBehaviour
         if (!WiteEastLeft.activeSelf)
         {
             CarManager.Instance.EastLeftMoveEventStart();
+            changeAngle = new Vector3(0, 180, 0);
+            isNeed = true;
+            animName = "left";
         }
         else
         {
             CarManager.Instance.EastLeftStopEventStart();
+                StopAnim(90);
         }
     } 
     public void EastRightMove()
@@ -67,10 +130,15 @@ public class TrafficPolice : MonoBehaviour
         if (!WiteEastRight.activeSelf)
         {
             CarManager.Instance.EastRightMoveEventStart();
+            changeAngle = new Vector3(0, 0, 0);
+            isNeed = true;
+            animName = "right";
+           
         }
         else
         {
             CarManager.Instance.EastRightStopEventStart();
+            StopAnim(180);
         }
     }  
     
