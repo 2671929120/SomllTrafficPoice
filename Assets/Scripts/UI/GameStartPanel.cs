@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
    class GameStartPanel : BasePanel
     {
-
-        private Text souceTest;
         private Button StartBtn;
         private Button IntroduceBtn;
         private Button SettingBtn;
@@ -28,7 +26,7 @@ using UnityEngine.UI;
         {
             base.OnInit();
 
-            souceTest = skinRoot.gameObject.transform.Find("Text").GetComponent<Text>();
+       
             StartBtn = skinRoot.gameObject.transform.Find("btnStart").GetComponent<Button>();
             IntroduceBtn = skinRoot.gameObject.transform.Find("btnStart").GetComponent<Button>();
             SettingBtn = skinRoot.gameObject.transform.Find("btnStart").GetComponent<Button>();
@@ -49,9 +47,10 @@ using UnityEngine.UI;
         private void StartGame()
         {
         //跳转到选择界面 
-        //  PanelManager.Open("ChoosePanel");
+         PanelManager.Open<ChoosePanel>();
+       
 
-        }
+    }
         /// <summary>
         /// 介绍游戏
         /// </summary>

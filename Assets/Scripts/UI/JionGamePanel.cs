@@ -26,8 +26,9 @@ public class JionGamePanel : BasePanel
     {
         base.OnInit();
 
-        //souceTest = skinRoot.gameObject.transform.Find("Text").GetComponent<Text>();
-      
+        textTips = skinRoot.gameObject.transform.Find("txtTips").GetComponent<Text>();
+        slider = skinRoot.gameObject.transform.Find("ProcessSlider").GetComponent<Slider>();
+
         //SettingBtn.onClick.AddListener(SettingBtnClick);
     }
 
@@ -41,7 +42,7 @@ public class JionGamePanel : BasePanel
 
     IEnumerator LoadScene()
     {
-        async = SceneManager.LoadSceneAsync("SampleScene");
+        async = SceneManager.LoadSceneAsync("GameMain");
         async.allowSceneActivation = false;
         while (!async.isDone)
         {
@@ -60,7 +61,13 @@ public class JionGamePanel : BasePanel
             {
                 textTips.text = "点击屏幕进入游戏";
                 if (Input.anyKey)
+                {
                     async.allowSceneActivation = true;
+                    PanelManager.Open<GameMainPanel>();
+                    PanelManager.Close("JionGamePanel");
+                }
+                  
+
             }
             yield return null;
         }

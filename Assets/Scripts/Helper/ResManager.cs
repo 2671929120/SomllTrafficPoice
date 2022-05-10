@@ -18,7 +18,7 @@ using UnityEngine;
             GameObject gameObject = Resources.Load<GameObject>("UI/" + path);
             if(gameObject == null)
             {
-                Debug.Log("加载路径或文件名有误请检查");
+                Debug.Log("加载路径或文件名有误请检查"+path);
             }
 
             return gameObject;

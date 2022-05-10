@@ -24,8 +24,10 @@ public class CameraViewChange : MonoBehaviour
     private Vector3 lastRot;
     void Start()
     {
-        lastPos = new Vector3(33.859f, 18.1f, -15.87f);
-        lastRot = new Vector3(0, -90, 0);
+        lastPos = new Vector3(20.35f, 17.092f, -28.04f);//33.859f, 18.1f, -15.87f);
+        transform.position = lastPos;
+        lastRot = new Vector3(0, 0, 0);
+        transform.localEulerAngles = lastRot;
         status = camereStatus.down;
         ChangeCameraView();
         camera = this.gameObject.GetComponent<Camera>();
@@ -40,20 +42,22 @@ public class CameraViewChange : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 float mouseX = Input.GetAxis("Mouse X") * 10;
-                Debug.Log("旋转视角" + mouseX);
-                Palyer.transform.Rotate(new Vector3(0,mouseX,0),Space.Self);
+                //Debug.Log("旋转视角" + mouseX);
+                //Palyer.transform.Rotate(new Vector3(0,mouseX,0),Space.Self);
                 this.transform.RotateAround(Palyer.transform.position, transform.up, mouseX);
             }
         }
+        this.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
     }
 
     public void ChangeCameraView()
     {
        if(status == camereStatus.up)
         {
-            status = camereStatus.down;
+ 
             this.transform.position = lastPos;
             this.transform.localEulerAngles = lastRot;
+            status = camereStatus.down;
         }
         else
         {
