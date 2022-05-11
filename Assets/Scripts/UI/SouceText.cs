@@ -6,7 +6,6 @@ using TMPro;
 
 public class SouceText : MonoBehaviour
 {
-  public  TextMeshPro text1;
 
    public  GameObject DestoryWest;
    public  GameObject DestoryEast;
@@ -18,60 +17,66 @@ public class SouceText : MonoBehaviour
     void Start()
     {
         objList = new List<GameObject>();
-        EventManager.Instance.AddEvent<CarType>(ClientEvent.SOUCETEXT, CreatText);
-        text1.text = "12312";
+        EventManager.Instance.AddEvent<int>(ClientEvent.SOUCETEXT, CreatText);
+      
 
 
-        GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");
-        GameObject text = Instantiate(textObj, DestoryWest.transform);
-        text.transform.localPosition = new Vector3(8.99f, 7.52f, -1.5f);
-        text.transform.localEulerAngles = new Vector3(0f, -90f, 0f); 
-        text.transform.GetComponent<TextMeshPro>().text = "+1";
+      
         
-        objList.Add(text);
+     
     }
 
 
-    public void CreatText(CarType carType)
+    public void CreatText(int  type)
     {
-        Debug.Log("1111");
-        if ((int)carType / 3 == 0)//西方
+        Debug.Log("-----触发提示"+ type);
+        if (type  == 1)//西方
         {
             GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");
             GameObject text = Instantiate(textObj, DestoryWest.transform);
-            text.transform.localPosition = new Vector3(8.99f, 7.52f, -1.5f);
+            text.transform.localPosition = new Vector3(22.76f, 9.06f, -6.68f);
             text.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
             text.transform.GetComponent<TextMeshPro>().text = "+1";
             objList.Add(text);
         }
-        else if((int)carType / 3 == 1)//北方
+         if(type == 2)//北方
         {
             GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");
             GameObject text = Instantiate(textObj, DestoryNorth.transform);
-            text.transform.localPosition = new Vector3(8.99f, 7.52f, -1.5f);
+            text.transform.localPosition = new Vector3(20.6f, 8.6f,-9.6f);
             text.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
             text.transform.GetComponent<TextMeshPro>().text = "+1";
             objList.Add(text);
 
         }
-        else if((int)carType / 3 == 2)//东方
+         if(type == 3)//东方
         {
             GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");
             GameObject text = Instantiate(textObj, DestoryEast.transform);
-            text.transform.localPosition = new Vector3(8.99f, 7.52f, -1.5f);
+            text.transform.localPosition = new Vector3(-23.6f, 9.6f,-3.61f);
             text.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
             text.transform.GetComponent<TextMeshPro>().text = "+1";
             objList.Add(text);
         }
-        else if((int)carType / 3 == 3)//南方
+         if(type == 4)//南方
         {
             GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");
             GameObject text = Instantiate(textObj, DestorySouth.transform);
-            text.transform.localPosition = new Vector3(8.99f, 7.52f, -1.5f);
-            text.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            text.transform.localPosition = new Vector3(-28.4f,10.62f, -2.8f);
+            text.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
             text.transform.GetComponent<TextMeshPro>().text = "+1";
             objList.Add(text);
         }
+    }
+
+    private void CreatTips(float angle,Vector3 pos,string str =null)
+    {
+        GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");
+        GameObject text = Instantiate(textObj, DestoryWest.transform);
+        text.transform.localPosition = pos;
+        text.transform.localEulerAngles = new Vector3(0f, angle, 0f);
+        text.transform.GetComponent<TextMeshPro>().text = str;
+        objList.Add(text);
     }
 
     private void Update()

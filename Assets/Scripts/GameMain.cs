@@ -25,6 +25,7 @@ using UnityEngine;
             DontDestroyOnLoad(PanelManager.root);
 
             PanelManager.Open<GameMainPanel>();
+            //PanelManager.Open<GameStartPanel>();
 
          }
 

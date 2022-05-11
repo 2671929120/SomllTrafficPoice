@@ -20,6 +20,10 @@ public class GameManager : Singleton<GameManager>
 
     public int GameSouce =0;
     public bool CanTouch = true;
+    public float CameraAnlgle;
+    public bool GameOver;
+    internal List<GameObject> TipsList =new List<GameObject>();
+
     public void AddGameSouce(int num)
     {
         GameSouce += num;

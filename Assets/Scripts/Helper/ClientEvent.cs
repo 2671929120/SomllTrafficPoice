@@ -12,7 +12,8 @@ public enum ClientEvent
 
     SOUCECHANGE,//分数改变
     CAMERACHANGE, // 视角改变
-
+    CAMERAANGLE, // 视角改变
+    TIPSSHOW, //提示信息更新 
     SOUCETEXT,//汽车销毁时显示
 
     WESTMIDDENMOVEBEFOR,

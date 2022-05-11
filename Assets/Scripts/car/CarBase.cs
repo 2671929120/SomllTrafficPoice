@@ -104,11 +104,11 @@ public class CarBase : MonoBehaviour
             moveType = MoveType.Stop;
         }
     }
-    public void CarDetory()
+    public void CarDetory(int type)
     {
         //将管理器中的实例移除掉
         // CarManager.Instance.DestoryCar(carType, this);
-        EventManager.Instance.TriggerEvent<CarType>(ClientEvent.SOUCETEXT, carType);
+        EventManager.Instance.TriggerEvent<int>(ClientEvent.SOUCETEXT, type);
         GameObject.Destroy(Car);
     }
 
@@ -123,7 +123,8 @@ public class CarBase : MonoBehaviour
         }
         if (collision.collider.tag == "destory")
         {
-            CarDetory();
+            int type = int.Parse(collision.collider.name.Split('_')[1]);
+            CarDetory(type);
             return;
         }
         //如果碰到的不是同种类型汽车 那么直接游戏结束
@@ -132,8 +133,8 @@ public class CarBase : MonoBehaviour
             if (collision.collider.gameObject.GetComponent<CarBase>().carType != this.carType)
             {
                 EventManager.Instance.TriggerEvent(ClientEvent.GAMEOVER);
-
-                Debug.Log("游戏结束");
+                GameManager.Instance.GameOver = true;
+                PanelManager.Open<FailPop>();
             }
             else
             {
@@ -165,7 +166,7 @@ public class CarBase : MonoBehaviour
         }
         if(other.tag == "already")
         {
-            Debug.Log("已经过了斑马线了可以继续走");
+            //Debug.Log("已经过了斑马线了可以继续走");
             JustGo = true;
             //移除事件
             CarManager.Instance.DestoryCar(carType, this);

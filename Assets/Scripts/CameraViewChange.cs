@@ -36,8 +36,8 @@ public class CameraViewChange : MonoBehaviour
     }
     private void Update()
     {
-
-        if (status == camereStatus.down)
+        EventManager.Instance.TriggerEvent<float>(ClientEvent.CAMERAANGLE, transform.localEulerAngles.y);
+        if (status == camereStatus.down && !GameManager.Instance.GameOver)
         {
             if (Input.GetMouseButton(0))
             {
