@@ -8,6 +8,7 @@ public class GameMainPanel : BasePanel
     private Text souceTest;
     private Button changeViewButton;
     private Button TestBtn;
+    private Text txtTime;
 
     public Image imgJianTou;
     public override void OnConfig()
@@ -26,6 +27,7 @@ public class GameMainPanel : BasePanel
         base.OnInit();
 
         souceTest = skinRoot.gameObject.transform.Find("Text").GetComponent<Text>();
+        txtTime = skinRoot.gameObject.transform.Find("txtTime").GetComponent<Text>();
         changeViewButton = skinRoot.gameObject.transform.Find("ChangeView").GetComponent<Button>();
         TestBtn = skinRoot.gameObject.transform.Find("TestBtn").GetComponent<Button>();
         imgJianTou = skinRoot.gameObject.transform.Find("Image/imgJiantou").GetComponent<Image>();
@@ -36,8 +38,8 @@ public class GameMainPanel : BasePanel
         EventManager.Instance.AddEvent<float>(ClientEvent.CAMERAANGLE, ImgChange);
 
         EventManager.Instance.AddEvent<string>(ClientEvent.TIPSSHOW, TipsShow);
+        EventManager.Instance.AddEvent(ClientEvent.TIMESHOW,TimeShow);
 
-        
     }
 
     public override void OnShow(params object[] para)
@@ -51,7 +53,12 @@ public class GameMainPanel : BasePanel
         base.OnClose();
         EventManager.Instance.RemoveEvent(ClientEvent.SOUCECHANGE, SouceChange);
     }
+    
 
+    private void TimeShow()
+    {
+        txtTime.text = GameManager.Instance.CameTime.ToString();
+    }
     public void SouceChange()
     {
         Debug.Log("现在的分数是" + GameManager.Instance.GameSouce);

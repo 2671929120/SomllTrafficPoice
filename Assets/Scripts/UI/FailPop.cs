@@ -13,9 +13,9 @@ public class FailPop : BasePanel
         base.OnConfig();
         panelConfig = new PanelConfig
         {
-            resName = "GameFialPop",
+            resName = "GameFailPop",
             layer = PanelManager.Layer.Pop,
-            panel = "GameFialPop",
+            panel = "GameFailPop",
         };
     }
 
@@ -39,12 +39,22 @@ public class FailPop : BasePanel
 
     private void AgainBtnClick()
     {
+        PanelManager.Close("FailPop");
+       
+        //SceneManager.LoadScene("GameMain");
+        //SceneManager.LoadScene("GameMain"); SceneManager.GetSceneByName("GameMain"); 
+        GameManager.Instance.GameAgain();
         SceneManager.LoadScene("GameMain");
+        Time.timeScale = 1;
     }
 
     private void BackBtnClick()
     {
         SceneManager.LoadScene("GameStart");
+        PanelManager.Close("GameMainPanel");
+        PanelManager.Close("FailPop");
+        PanelManager.Open<GameStartPanel>();
+        Time.timeScale = 1;
     }
 
 

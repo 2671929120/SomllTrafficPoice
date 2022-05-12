@@ -172,6 +172,7 @@ public class CarBase : MonoBehaviour
             CarManager.Instance.DestoryCar(carType, this);
             this.GetComponent<BoxCollider>().enabled = false;
             TimeTool.Instance.Delay(2f, () => { this.GetComponent<BoxCollider>().enabled = true; });
+           
         }
     }
 

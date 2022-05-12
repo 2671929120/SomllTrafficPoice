@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -24,11 +25,26 @@ using UnityEngine;
             PanelManager.Init();
             DontDestroyOnLoad(PanelManager.root);
 
-            PanelManager.Open<GameMainPanel>();
-            //PanelManager.Open<GameStartPanel>();
-
+           // PanelManager.Open<GameMainPanel>();
+        PanelManager.Open<GameStartPanel>();
+       // Test();
          }
 
+
+    private void Test()
+    {
+        Assembly assembly = Assembly.GetExecutingAssembly();
+        //Assembly assembly = Assembly.Load("car");
+        Type type = assembly.GetType("GameCar");
+        Debug.Log("开始加载"+ type);
+
+       // Activator.CreateInstance(type);
+        MethodInfo mInfo = type.GetMethod("Test");
+        Debug.Log("开始加载" + mInfo);
+        object[] obs = { 10 };
+        mInfo.Invoke(null, obs);
+
+    }
    
 
         private void Update()

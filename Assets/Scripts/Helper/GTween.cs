@@ -16,10 +16,8 @@ public class GTween : MonoBehaviour
         if (objList.Count > 0)
         {
             foreach (var obj in objList)
-            {
-
-                obj.transform.localPosition += Vector3.up * Time.deltaTime * 100;
-                //obj.transform.Translate(Vector3.up * Time.deltaTime, Space.Self);
+            {  
+                obj.transform.localPosition += Vector3.up * Time.deltaTime * 80f;
                 //obj.GetComponent<TextMeshPro>().color = new Color(obj1.color.r, obj1.color.g, obj1.color.b, obj1.color.a - Time.deltaTime * 1);
             }
         }
@@ -31,6 +29,7 @@ public class GTween : MonoBehaviour
         {
             if (objList[i].transform.localPosition.y > 200)
             {
+                Debug.Log("-----"+objList[i].transform.localPosition.y);
                 Destroy(objList[i]);
                 objList.RemoveAt(i);
             }

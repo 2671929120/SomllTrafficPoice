@@ -16,6 +16,7 @@ public class CameraViewChange : MonoBehaviour
         down,
     }
     public Camera camera;
+    public GameObject cameraObj;
     private camereStatus status;
     public GameObject Palyer;
 
@@ -31,7 +32,7 @@ public class CameraViewChange : MonoBehaviour
         status = camereStatus.down;
         ChangeCameraView();
         camera = this.gameObject.GetComponent<Camera>();
-
+        cameraObj = GameObject.Find("Main Camera");
         EventManager.Instance.AddEvent(ClientEvent.CAMERACHANGE, ChangeCameraView);
     }
     private void Update()
@@ -44,19 +45,19 @@ public class CameraViewChange : MonoBehaviour
                 float mouseX = Input.GetAxis("Mouse X") * 10;
                 //Debug.Log("旋转视角" + mouseX);
                 //Palyer.transform.Rotate(new Vector3(0,mouseX,0),Space.Self);
-                this.transform.RotateAround(Palyer.transform.position, transform.up, mouseX);
+                cameraObj.transform.RotateAround(Palyer.transform.position, transform.up, mouseX);
             }
         }
-        this.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
+        cameraObj.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
     }
 
     public void ChangeCameraView()
     {
        if(status == camereStatus.up)
         {
- 
-            this.transform.position = lastPos;
-            this.transform.localEulerAngles = lastRot;
+
+            cameraObj.transform.position = lastPos;
+            cameraObj.transform.localEulerAngles = lastRot;
             status = camereStatus.down;
         }
         else
@@ -64,8 +65,8 @@ public class CameraViewChange : MonoBehaviour
             status = camereStatus.up;
             lastPos = transform.position;
             lastRot = transform.localEulerAngles;
-            this.transform.position = new Vector3(18.353f, 73.393f ,- 13.23f);
-            this.transform.localEulerAngles = new Vector3(90,0,0);
+            cameraObj.transform.position = new Vector3(18.353f, 73.393f ,- 13.23f);
+            cameraObj.transform.localEulerAngles = new Vector3(90,0,0);
            
         }
     }

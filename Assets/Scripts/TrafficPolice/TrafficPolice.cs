@@ -30,6 +30,7 @@ public class TrafficPolice : MonoBehaviour
     public bool zuijin;
     void Start()
     {
+        Debug.Log("开始加载TrafficPolice");
         EventManager.Instance.AddEvent(ClientEvent.WESTMIDDENMOVE, WestMiddenMove);
         EventManager.Instance.AddEvent(ClientEvent.WESTLEFTMOVE, WestLeftMove);
         EventManager.Instance.AddEvent(ClientEvent.WESTRIGHTMOVE, WestRightMove);
@@ -55,7 +56,7 @@ public class TrafficPolice : MonoBehaviour
         {
             if (Mathf.Abs(TafficPoliceMan.transform.localEulerAngles.y%360 - changeAngle.y )> 10f)
             {
-                Debug.Log("旋转中"+ TafficPoliceMan.transform.localEulerAngles.y % 360);
+               // Debug.Log("旋转中"+ TafficPoliceMan.transform.localEulerAngles.y % 360);
                 if(changeAngle.y - TafficPoliceMan.transform.localEulerAngles.y % 360 > 0)
                 {
                     TafficPoliceMan.transform.Rotate(0, 200f * Time.deltaTime, 0,Space.Self);

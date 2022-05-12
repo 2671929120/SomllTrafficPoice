@@ -8,29 +8,72 @@ public class GameCar : MonoBehaviour
     private void Start()
     {
         //初始化所有汽车信息
-        StartCoroutine(WestMiddleInit(10));
-        StartCoroutine(WestRightInit(10));
-        StartCoroutine(WestLeftInit(10));
+        //StartCoroutine(WestMiddleInit(10));
+        //StartCoroutine(WestRightInit(10));
+        //StartCoroutine(WestLeftInit(10));
 
-        StartCoroutine(NorthMiddleInit(10));
-        StartCoroutine(NorthRightInit(10));
-        StartCoroutine(NorthLeftInit(10));
+        // StartCoroutine(NorthMiddleInit(10));
+        //StartCoroutine(NorthRightInit(10));
+        //StartCoroutine(NorthLeftInit(10));
 
-        StartCoroutine(SouthMiddleInit(10));
-        StartCoroutine(SouthRightInit(10));
-        StartCoroutine(SouthLeftInit(10));
+        //StartCoroutine(SouthMiddleInit(10));
+        //StartCoroutine(SouthRightInit(10));
+        //StartCoroutine(SouthLeftInit(10));
 
-        StartCoroutine(EastMiddleInit(10));
-        StartCoroutine(EastRightInit(10));
-        StartCoroutine(EastLeftInit(10));
- 
-        
-        
-      
+        //StartCoroutine(EastMiddleInit(10));
+        //StartCoroutine(EastRightInit(10));
+        //StartCoroutine(EastLeftInit(10));
+        StartCoroutine(GameStart());
+
+
     }
 
-    IEnumerator WestRightInit(int nums)
+
+    IEnumerator GameStart()
     {
+        while(GameManager.Instance.CameTime < 120)
+        {
+            yield return new WaitForSeconds(1);
+            GameManager.Instance.CameTime += 1;
+            EventManager.Instance.TriggerEvent(ClientEvent.TIMESHOW);
+            if (Config.ConfigFirstLevel.ContainsKey(GameManager.Instance.CameTime))
+            {
+                foreach (string str in Config.ConfigFirstLevel[GameManager.Instance.CameTime])
+                {
+                    string[] strs = str.Split('_');
+                    if(strs[0]!= "Tips")
+                    {
+                        object[] obj = { int.Parse(strs[1].ToString()) };
+                        Debug.Log(strs[0]+int.Parse(strs[1].ToString()));
+                        
+                           StartCoroutine(strs[0], strs[1]);
+                       
+                       
+                       
+                       
+                    }
+                    else
+                    {
+                        EventManager.Instance.TriggerEvent<string>(ClientEvent.TIPSSHOW, strs[1]);
+                    }
+                }
+            }
+        }
+        
+    }
+
+    public void CarInit(string name,Object[] obj)
+    {
+        
+        StartCoroutine(name,obj);
+    }
+     IEnumerator WestRightInit(object objs)
+    {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        } 
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -55,8 +98,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator WestLeftInit(int nums)
+    IEnumerator WestLeftInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -81,8 +129,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator WestMiddleInit(int nums)
+    IEnumerator WestMiddleInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -107,8 +160,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator EastRightInit(int nums)
+    IEnumerator EastRightInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -133,8 +191,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator EastLeftInit(int nums)
+    IEnumerator EastLeftInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -159,8 +222,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator EastMiddleInit(int nums)
+    IEnumerator EastMiddleInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -185,8 +253,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }  
-    IEnumerator SouthRightInit(int nums)
+    IEnumerator SouthRightInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -211,8 +284,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator SouthLeftInit(int nums)
+    IEnumerator SouthLeftInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -237,8 +315,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator SouthMiddleInit(int nums)
+    IEnumerator SouthMiddleInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -263,8 +346,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }   
-    IEnumerator NorthRightInit(int nums)
+    IEnumerator NorthRightInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -289,8 +377,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator NorthLeftInit(int nums)
+    IEnumerator NorthLeftInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {
@@ -315,8 +408,13 @@ public class GameCar : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
     }
-    IEnumerator NorthMiddleInit(int nums)
+    IEnumerator NorthMiddleInit(object objs)
     {
+        int nums = 0;
+        if (objs != null)
+        {
+            nums = int.Parse(objs.ToString());
+        }
         yield return new WaitForSeconds(Random.Range(0f, 3f));
         for (int i = 0; i < nums; i++)
         {

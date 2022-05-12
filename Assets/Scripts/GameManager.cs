@@ -23,10 +23,23 @@ public class GameManager : Singleton<GameManager>
     public float CameraAnlgle;
     public bool GameOver;
     internal List<GameObject> TipsList =new List<GameObject>();
+    internal int CameTime=0;
 
     public void AddGameSouce(int num)
     {
         GameSouce += num;
+        EventManager.Instance.TriggerEvent(ClientEvent.SOUCECHANGE);
+    }
+
+
+    public void GameAgain()
+    {
+        GameSouce = 0;
+        CanTouch = true;
+        GameOver = false;
+        TipsList = new List<GameObject>();
+        CameTime = 0;
+        TimeTool.Instance.StopAllCoroutines();
         EventManager.Instance.TriggerEvent(ClientEvent.SOUCECHANGE);
     }
 

@@ -75,6 +75,7 @@ using UnityEngine;
         public static void Close(string name)
         {
             //面板没有打开
+
             if (!panels.ContainsKey(name))
             {
                 return;
@@ -89,6 +90,16 @@ using UnityEngine;
             Component.Destroy(panel);
 
         }
+
+        public static void CloseAll(Layer layer)
+        {
+            Transform layerobj = layers[layer];
+        int i = 0;
+        while (i < layerobj.childCount)
+        {
+           // layerobj.gameObject.Destroy (layerobj.GetChild(i++).gameObject);
+        }
+       }
         /// <summary>
         /// 现实提示信息
         /// </summary>

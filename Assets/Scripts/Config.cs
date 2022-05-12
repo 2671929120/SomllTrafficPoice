@@ -5,6 +5,20 @@ using UnityEngine;
 public class Config 
 {
     //第一关
+    public static Dictionary<int, List<string>> ConfigFirstLevel = new Dictionary<int, List<string>>
+    {
+        { 1,new List<string> {
+            "WestRightInit_2", "WestMiddleInit_2", "WestLeftInit_2" ,
+            "EastRightInit_2", "EastMiddleInit_2", "EastLeftInit_2" ,
+            "NorthRightInit_0", "NorthMiddleInit_2", "NorthLeftInit_2" ,
+            "SouthRightInit_0", "SouthMiddleInit_2", "SouthLeftInit_2" } },
+        
+        { 18,new List<string> {"Tips_西方车道迎来高峰期", "WestLeftInit_10" , "WestRightInit_10" } },
+        { 4,new List<string> { "Tips_各方车道开始通行" } },
+
+        { 30,new List<string> {"WestMiddleInit_10", "WestLeftInit_10" , "WestRightInit_10" } }
+
+    };
     public int WestLeftCarCount = 10;
 
 
