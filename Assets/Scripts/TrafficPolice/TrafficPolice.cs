@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class TrafficPolice : MonoBehaviour
 {
-    public GameObject WiteEastLeft;
-    public GameObject WiteEastRight;
-    public GameObject WiteEastMiddle;
-    public GameObject WiteWestLeft;
-    public GameObject WiteWestRight;
-    public GameObject WiteWestMiddle;    
-    public GameObject WiteNorthLeft;
-    public GameObject WiteNorthRight;
-    public GameObject WiteNorthMiddle;    
-    public GameObject WiteSouthLeft;
-    public GameObject WiteSouthRight;
-    public GameObject WiteSouthMiddle;
+    private GameObject WiteEastLeft;
+    private GameObject WiteEastRight;
+    private GameObject WiteEastMiddle;
+    private GameObject WiteWestLeft;
+    private GameObject WiteWestRight;
+    private GameObject WiteWestMiddle;
+    private GameObject WiteNorthLeft;
+    private GameObject WiteNorthRight;
+    private GameObject WiteNorthMiddle;
+    private GameObject WiteSouthLeft;
+    private GameObject WiteSouthRight;
+    private GameObject WiteSouthMiddle;
 
     public Animator animatorPlayer;
     public GameObject TafficPoliceMan;
@@ -31,6 +31,22 @@ public class TrafficPolice : MonoBehaviour
     void Start()
     {
         Debug.Log("开始加载TrafficPolice");
+        WiteEastLeft = GameObject.Find("Colliders/witeEastLeft");
+        WiteEastRight = GameObject.Find("Colliders/witeEastRight");
+        WiteEastMiddle = GameObject.Find("Colliders/witeEastMiddle");
+
+        WiteWestLeft = GameObject.Find("Colliders/witeWestLeft");
+        WiteWestRight = GameObject.Find("Colliders/witeWestRight");
+        WiteWestMiddle = GameObject.Find("Colliders/witeWestMiddle");
+
+        WiteSouthLeft = GameObject.Find("Colliders/witeSouthLeft");
+        WiteSouthRight = GameObject.Find("Colliders/witeSouthRight");
+        WiteSouthMiddle = GameObject.Find("Colliders/witeSouthMiddle");
+
+        WiteNorthLeft = GameObject.Find("Colliders/witenorthLeft");
+        WiteNorthRight = GameObject.Find("Colliders/witenorthRight");
+        WiteNorthMiddle = GameObject.Find("Colliders/witenorthMiddle");
+
         EventManager.Instance.AddEvent(ClientEvent.WESTMIDDENMOVE, WestMiddenMove);
         EventManager.Instance.AddEvent(ClientEvent.WESTLEFTMOVE, WestLeftMove);
         EventManager.Instance.AddEvent(ClientEvent.WESTRIGHTMOVE, WestRightMove);
@@ -47,9 +63,23 @@ public class TrafficPolice : MonoBehaviour
         changeAngle = Vector3.zero;
         isNeed = false;
     }
+    private void OnDestroy()
+    {
+        EventManager.Instance.RemoveEvent(ClientEvent.WESTMIDDENMOVE, WestMiddenMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.WESTLEFTMOVE, WestLeftMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.WESTRIGHTMOVE, WestRightMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.EASTMIDDENMOVE, EastMiddenMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.EASTLEFTMOVE, EastLeftMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.EASTRIGHTMOVE, EastRightMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.SOUTHMIDDENMOVE, SouthMiddenMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.SOUTHLEFTMOVE, SouthLeftMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.SOUTHRIGHTMOVE, SouthRightMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.NORTHMIDDENMOVE, NorthMiddenMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.NORTHLEFTMOVE, NorthLeftMove);
+        EventManager.Instance.RemoveEvent(ClientEvent.NORTHRIGHTMOVE, NorthRightMove);
+    }
 
-    
-    
+
     private void Update()
     {
         if (isNeed)

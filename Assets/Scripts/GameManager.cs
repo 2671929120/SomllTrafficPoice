@@ -41,6 +41,16 @@ public class GameManager : Singleton<GameManager>
         CameTime = 0;
         TimeTool.Instance.StopAllCoroutines();
         EventManager.Instance.TriggerEvent(ClientEvent.SOUCECHANGE);
+        if (TipsList.Count > 0)
+        {
+            for (int i = TipsList.Count - 1; i >= 0; i--)
+            {
+                TipsList[i].transform.gameObject.SetActive(false);
+                TipsList.RemoveAt(i);
+
+            }
+
+        }
     }
 
 }

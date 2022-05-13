@@ -25,11 +25,13 @@ public class SouceText : MonoBehaviour
         
      
     }
-
+    private void OnDestroy()
+    {
+        EventManager.Instance.RemoveEvent<int>(ClientEvent.SOUCETEXT, CreatText);
+    }
 
     public void CreatText(int  type)
     {
-        Debug.Log("-----触发提示"+ type);
         if (type  == 1)//西方
         {
             GameObject textObj = ResManager.LoadUIPrefab("TextMeshPro");

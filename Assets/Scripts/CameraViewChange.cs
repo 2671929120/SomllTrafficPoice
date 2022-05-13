@@ -16,7 +16,7 @@ public class CameraViewChange : MonoBehaviour
         down,
     }
     public Camera camera;
-    public GameObject cameraObj;
+    private GameObject cameraObj;
     private camereStatus status;
     public GameObject Palyer;
 
@@ -25,14 +25,15 @@ public class CameraViewChange : MonoBehaviour
     private Vector3 lastRot;
     void Start()
     {
+        Debug.Log("当前的相机无提示");
         lastPos = new Vector3(20.35f, 17.092f, -28.04f);//33.859f, 18.1f, -15.87f);
         transform.position = lastPos;
         lastRot = new Vector3(0, 0, 0);
         transform.localEulerAngles = lastRot;
         status = camereStatus.down;
+        cameraObj = GameObject.Find("Camera");
         ChangeCameraView();
         camera = this.gameObject.GetComponent<Camera>();
-        cameraObj = GameObject.Find("Main Camera");
         EventManager.Instance.AddEvent(ClientEvent.CAMERACHANGE, ChangeCameraView);
     }
     private void Update()
@@ -50,6 +51,10 @@ public class CameraViewChange : MonoBehaviour
         }
         cameraObj.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 0);
     }
+    private void OnDestroy()
+    {
+        EventManager.Instance.RemoveEvent(ClientEvent.CAMERACHANGE, ChangeCameraView);
+    }
 
     public void ChangeCameraView()
     {
@@ -63,8 +68,8 @@ public class CameraViewChange : MonoBehaviour
         else
         {
             status = camereStatus.up;
-            lastPos = transform.position;
-            lastRot = transform.localEulerAngles;
+            lastPos = cameraObj.transform.position;
+            lastRot = cameraObj.transform.localEulerAngles;
             cameraObj.transform.position = new Vector3(18.353f, 73.393f ,- 13.23f);
             cameraObj.transform.localEulerAngles = new Vector3(90,0,0);
            

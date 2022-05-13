@@ -52,6 +52,10 @@ public class GameMainPanel : BasePanel
     {
         base.OnClose();
         EventManager.Instance.RemoveEvent(ClientEvent.SOUCECHANGE, SouceChange);
+        EventManager.Instance.RemoveEvent<float>(ClientEvent.CAMERAANGLE, ImgChange);
+
+        EventManager.Instance.RemoveEvent<string>(ClientEvent.TIPSSHOW, TipsShow);
+        EventManager.Instance.RemoveEvent(ClientEvent.TIMESHOW, TimeShow);
     }
     
 
