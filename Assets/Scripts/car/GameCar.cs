@@ -27,6 +27,7 @@ public class GameCar : MonoBehaviour
         EventManager.Instance.AddEvent(ClientEvent.GAMESTART, GameStart);
 
 
+
     }
     public void GameStart()
     {

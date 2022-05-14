@@ -28,8 +28,8 @@ using UnityEngine.UI;
 
        
             StartBtn = skinRoot.gameObject.transform.Find("btnStart").GetComponent<Button>();
-            IntroduceBtn = skinRoot.gameObject.transform.Find("btnStart").GetComponent<Button>();
-            SettingBtn = skinRoot.gameObject.transform.Find("btnStart").GetComponent<Button>();
+            IntroduceBtn = skinRoot.gameObject.transform.Find("btnIntroduce").GetComponent<Button>();
+            SettingBtn = skinRoot.gameObject.transform.Find("btnSet").GetComponent<Button>();
             StartBtn.onClick.AddListener(StartGame);
             IntroduceBtn.onClick.AddListener(IntroduceBtnClick);
             SettingBtn.onClick.AddListener(SettingBtnClick);
@@ -56,7 +56,7 @@ using UnityEngine.UI;
         /// </summary>
         private void IntroduceBtnClick()
         {
-
+          PanelManager.Open<IntroducePop>();
         }
 
         /// <summary>

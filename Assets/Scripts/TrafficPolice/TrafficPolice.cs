@@ -65,6 +65,7 @@ public class TrafficPolice : MonoBehaviour
     }
     private void OnDestroy()
     {
+      
         EventManager.Instance.RemoveEvent(ClientEvent.WESTMIDDENMOVE, WestMiddenMove);
         EventManager.Instance.RemoveEvent(ClientEvent.WESTLEFTMOVE, WestLeftMove);
         EventManager.Instance.RemoveEvent(ClientEvent.WESTRIGHTMOVE, WestRightMove);

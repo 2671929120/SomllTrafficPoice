@@ -38,13 +38,13 @@ class LevelPanel : BasePanel
                 if (temp >= Config.AllLevelConfig.Count) break;
                 GameObject textObj = ResManager.LoadUIPrefab("LevelItem");
                 GameObject text = Instantiate(textObj, Content.transform);
-                text.transform.localPosition = new Vector3(-559+j *600f, -150+i*-350f, 0);
+                text.transform.localPosition = new Vector3(-500+j *500f, -150+i*-350f, 0);
                 Button item = text.transform.GetComponent<Button>();
                 item.transform.Find("Text").GetComponent<Text>().text = "关卡" + (temp + 1);
-                item.onClick.AddListener(() => { 
-                
-                    PanelManager.Open<JionGamePanel>(temp + 1);
+                item.onClick.AddListener(() => {
+                    PanelManager.Open<JionGamePanel>(1 + 1);
                     PanelManager.Close("LevelPanel");
+
                 });
                 buttons.Add(item);
 
@@ -53,6 +53,11 @@ class LevelPanel : BasePanel
             }
         }
 
+    }
+    public void ItemClick(int num)
+    {
+        PanelManager.Open<JionGamePanel>(num + 1);
+        PanelManager.Close("LevelPanel");
     }
 
     public override void OnShow(params object[] para)

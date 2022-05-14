@@ -56,9 +56,10 @@ public class GameMainPanel : BasePanel
         if (para == null) return;
         int LevelNum = int.Parse(para[0].ToString());
         GameManager.Instance.GameLevel = LevelNum;
-        TimeTool.Instance.Delay(0.2f, () =>
+       // EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
+        TimeTool.Instance.Delay(1f, () =>
         {
-            EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
+           EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
         } );
 
        
@@ -83,7 +84,7 @@ public class GameMainPanel : BasePanel
 
     private void StapChange()
     {
-        txtStap.text ="剩余步数："+ GameManager.Instance.GameStap.ToString();
+        txtStap.text ="剩余步数:"+ GameManager.Instance.GameStap.ToString();
     }
 
     private void TimeShow()
@@ -93,7 +94,7 @@ public class GameMainPanel : BasePanel
     public void SouceChange()
     {
         Debug.Log("现在的分数是" + GameManager.Instance.GameSouce);
-        souceTest.text = "分数：" + GameManager.Instance.GameSouce;
+        souceTest.text = "分数:" + GameManager.Instance.GameSouce;
     }
 
     public void ViewChange()

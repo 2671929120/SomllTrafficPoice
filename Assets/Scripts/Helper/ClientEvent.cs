@@ -16,6 +16,8 @@ public enum ClientEvent
     TIPSSHOW, //提示信息更新 
     SOUCETEXT,//汽车销毁时显示
     TIMESHOW,//倒计时
+    STAPCHANGE,//步数变化
+    GAMESTART,// 游戏开始
 
     WESTMIDDENMOVEBEFOR,
     WESTLEFTMOVEBEFOR,
@@ -48,7 +50,6 @@ public enum ClientEvent
     NORTHMIDDENMOVE,
     NORTHLEFTMOVE,
     NORTHRIGHTMOVE,
-    STAPCHANGE,
-    GAMESTART,
+
 }
 

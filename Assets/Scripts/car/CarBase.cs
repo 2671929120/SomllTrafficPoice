@@ -107,8 +107,9 @@ public class CarBase : MonoBehaviour
     public void CarDetory(int type)
     {
         //将管理器中的实例移除掉
-        // CarManager.Instance.DestoryCar(carType, this);
+        CarManager.Instance.DestoryCar(carType, this);
         EventManager.Instance.TriggerEvent<int>(ClientEvent.SOUCETEXT, type);
+        
         GameObject.Destroy(Car);
     }
 
