@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Config 
+public class Config
 {
+   
+
     //第一关
     public static Dictionary<int, List<string>> ConfigFirstLevel = new Dictionary<int, List<string>>
     {
         { 1,new List<string> {
+            "Stap_2",
             "WestRightInit_2", "WestMiddleInit_2", "WestLeftInit_2" ,
             "EastRightInit_2", "EastMiddleInit_2", "EastLeftInit_2" ,
             "NorthRightInit_0", "NorthMiddleInit_2", "NorthLeftInit_2" ,
@@ -24,6 +27,15 @@ public class Config
 
     //第二关
 
+    public static Dictionary<int, Dictionary<int, List<string>>> AllLevelConfig = new Dictionary<int, Dictionary<int, List<string>>>{
+        {1,ConfigFirstLevel},
+        {2,ConfigFirstLevel},
+        {3,ConfigFirstLevel},
+        {4,ConfigFirstLevel}
+
+
+
+     };
 
     //汽车初始位置配置
     public static Vector3 WestLeftPos = new Vector3(-51.5f, 12.15f, -17.3f);

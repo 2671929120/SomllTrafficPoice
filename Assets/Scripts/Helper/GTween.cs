@@ -7,7 +7,7 @@ public class GTween : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventManager.Instance.AddEvent(ClientEvent.GAMEOVER,GameFial);
     }
 
     private void Update()
@@ -16,11 +16,25 @@ public class GTween : MonoBehaviour
         if (objList.Count > 0)
         {
             foreach (var obj in objList)
-            {  
+            {
                 obj.transform.localPosition += Vector3.up * Time.deltaTime * 80f;
                 //obj.GetComponent<TextMeshPro>().color = new Color(obj1.color.r, obj1.color.g, obj1.color.b, obj1.color.a - Time.deltaTime * 1);
             }
         }
+
+    }
+    private void OnDestroy()
+    {
+
+        EventManager.Instance.RemoveEvent(ClientEvent.GAMEOVER, GameFial);
+    }
+    private void GameFial() {  
+            List<GameObject> objList = GameManager.Instance.TipsList;
+            for (int i = objList.Count - 1; i >= 0; i--)
+            {          
+               Destroy(objList[i]);
+               objList.RemoveAt(i);
+            }
     }
     public void LateUpdate()
     {

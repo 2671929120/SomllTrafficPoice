@@ -8,6 +8,8 @@ public class FailPop : BasePanel
 {
     private Button backBtn;
     private Button againBtn;
+    private Text txtDes;
+    private Image imgIcon;
     public override void OnConfig()
     {
         base.OnConfig();
@@ -26,6 +28,8 @@ public class FailPop : BasePanel
         Time.timeScale = 0;
         backBtn = skinRoot.gameObject.transform.Find("backBtn").GetComponent<Button>();
         againBtn = skinRoot.gameObject.transform.Find("againBtn").GetComponent<Button>();
+        txtDes = skinRoot.gameObject.transform.Find("txtDse").GetComponent<Text>();
+        imgIcon = skinRoot.gameObject.transform.Find("Image/imgIcon").GetComponent<Image>();
 
         backBtn.onClick.AddListener(BackBtnClick);
         againBtn.onClick.AddListener(AgainBtnClick);
@@ -34,6 +38,14 @@ public class FailPop : BasePanel
     public override void OnShow(params object[] para)
     {
         base.OnShow(para);
+        if (para == null) return;
+        string textDes = para[0].ToString();
+        txtDes.text = textDes;
+        if (para.Length == 2)
+        {
+            imgIcon.gameObject.SetActive(false);
+        }
+        
 
     }
 

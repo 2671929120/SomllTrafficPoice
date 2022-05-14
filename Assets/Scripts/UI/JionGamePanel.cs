@@ -9,8 +9,8 @@ public class JionGamePanel : BasePanel
     private AsyncOperation async = null;
     private Text textTips;
     private float progerssValue;
-    private Slider slider; 
-
+    private Slider slider;
+    private int LevelNum;
     public override void OnConfig()
     {
         base.OnConfig();
@@ -35,9 +35,14 @@ public class JionGamePanel : BasePanel
     public override void OnShow(params object[] para)
     {
         base.OnShow(para);
+        textTips.text = "";
+        if (para == null) return;
+        LevelNum = int.Parse(para[0].ToString());
 
         StartCoroutine("LoadScene");
-        textTips.text = "";
+   
+
+
     }
 
     IEnumerator LoadScene()
@@ -63,7 +68,7 @@ public class JionGamePanel : BasePanel
                 if (Input.anyKey)
                 {
                     async.allowSceneActivation = true;
-                    PanelManager.Open<GameMainPanel>();
+                    PanelManager.Open<GameMainPanel>(LevelNum);
                     PanelManager.Close("JionGamePanel");
                 }
                   

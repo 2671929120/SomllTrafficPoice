@@ -43,7 +43,7 @@ public class ChoosePanel : BasePanel
       
     private void ChooseBtn2Click()
     {
-        PanelManager.Open<JionGamePanel>();
+        PanelManager.Open<LevelPanel>();
         PanelManager.Close("ChoosePanel");
         PanelManager.Close("GameStartPanel");
     }

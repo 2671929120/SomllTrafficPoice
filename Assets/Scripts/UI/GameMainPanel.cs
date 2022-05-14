@@ -9,6 +9,7 @@ public class GameMainPanel : BasePanel
     private Button changeViewButton;
     private Button TestBtn;
     private Text txtTime;
+    private Text txtStap;
 
     public Image imgJianTou;
     public override void OnConfig()
@@ -27,6 +28,7 @@ public class GameMainPanel : BasePanel
         base.OnInit();
 
         souceTest = skinRoot.gameObject.transform.Find("Text").GetComponent<Text>();
+        txtStap = skinRoot.gameObject.transform.Find("txtStap").GetComponent<Text>();
         txtTime = skinRoot.gameObject.transform.Find("txtTime").GetComponent<Text>();
         changeViewButton = skinRoot.gameObject.transform.Find("ChangeView").GetComponent<Button>();
         TestBtn = skinRoot.gameObject.transform.Find("TestBtn").GetComponent<Button>();
@@ -38,13 +40,27 @@ public class GameMainPanel : BasePanel
         EventManager.Instance.AddEvent<float>(ClientEvent.CAMERAANGLE, ImgChange);
 
         EventManager.Instance.AddEvent<string>(ClientEvent.TIPSSHOW, TipsShow);
-        EventManager.Instance.AddEvent(ClientEvent.TIMESHOW,TimeShow);
+        EventManager.Instance.AddEvent(ClientEvent.TIMESHOW,TimeShow); 
+        EventManager.Instance.AddEvent(ClientEvent.GAMEOVER,GameOver);
+        EventManager.Instance.AddEvent(ClientEvent.STAPCHANGE,StapChange);
 
     }
-
+    /// <summary>
+    /// paras 
+    /// 关卡第几关
+    /// </summary>
+    /// <param name="para"></param>
     public override void OnShow(params object[] para)
     {
         base.OnShow(para);
+        if (para == null) return;
+        int LevelNum = int.Parse(para[0].ToString());
+        GameManager.Instance.GameLevel = LevelNum;
+        TimeTool.Instance.Delay(0.2f, () =>
+        {
+            EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
+        } );
+
        
     }
 
@@ -56,8 +72,19 @@ public class GameMainPanel : BasePanel
 
         EventManager.Instance.RemoveEvent<string>(ClientEvent.TIPSSHOW, TipsShow);
         EventManager.Instance.RemoveEvent(ClientEvent.TIMESHOW, TimeShow);
+        EventManager.Instance.RemoveEvent(ClientEvent.GAMEOVER, GameOver);
+        EventManager.Instance.RemoveEvent(ClientEvent.STAPCHANGE, StapChange);
     }
-    
+    private void GameOver()
+    {
+        object[] obj = { "步数不足，指挥失败", true};
+        PanelManager.Open<FailPop>(obj);
+    }
+
+    private void StapChange()
+    {
+        txtStap.text ="剩余步数："+ GameManager.Instance.GameStap.ToString();
+    }
 
     private void TimeShow()
     {

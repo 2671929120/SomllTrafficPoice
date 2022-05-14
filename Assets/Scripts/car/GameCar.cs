@@ -23,38 +23,46 @@ public class GameCar : MonoBehaviour
         //StartCoroutine(EastMiddleInit(10));
         //StartCoroutine(EastRightInit(10));
         //StartCoroutine(EastLeftInit(10));
-        StartCoroutine(GameStart());
+       
+        EventManager.Instance.AddEvent(ClientEvent.GAMESTART, GameStart);
 
 
     }
-
-
-    IEnumerator GameStart()
+    public void GameStart()
     {
-        while(GameManager.Instance.CameTime < 120)
+        StartCoroutine(InitGame());
+    }
+
+
+    IEnumerator InitGame()
+    {
+        Dictionary<int, List<string>> dis = Config.AllLevelConfig[GameManager.Instance.GameLevel - 1];
+        while (GameManager.Instance.CameTime < 120)
         {
             yield return new WaitForSeconds(1);
             GameManager.Instance.CameTime += 1;
             EventManager.Instance.TriggerEvent(ClientEvent.TIMESHOW);
-            if (Config.ConfigFirstLevel.ContainsKey(GameManager.Instance.CameTime))
+            if (dis.ContainsKey(GameManager.Instance.CameTime))
             {
-                foreach (string str in Config.ConfigFirstLevel[GameManager.Instance.CameTime])
+                foreach (string str in dis[GameManager.Instance.CameTime])
                 {
                     string[] strs = str.Split('_');
-                    if(strs[0]!= "Tips")
+                    if(strs[0]== "Tips")
                     {
-                        object[] obj = { int.Parse(strs[1].ToString()) };
-                        Debug.Log(strs[0]+int.Parse(strs[1].ToString()));
-                        
-                           StartCoroutine(strs[0], strs[1]);
+                        EventManager.Instance.TriggerEvent<string>(ClientEvent.TIPSSHOW, strs[1]);
                        
-                       
-                       
-                       
+                                          
+                    }else if (strs[0] == "Stap")
+                    {
+                        GameManager.Instance.GameStap = int.Parse(strs[1].ToString());
+                        EventManager.Instance.TriggerEvent(ClientEvent.STAPCHANGE);
                     }
                     else
                     {
-                        EventManager.Instance.TriggerEvent<string>(ClientEvent.TIPSSHOW, strs[1]);
+                        object[] obj = { int.Parse(strs[1].ToString()) };
+                        Debug.Log(strs[0] + int.Parse(strs[1].ToString()));
+
+                        StartCoroutine(strs[0], strs[1]);
                     }
                 }
             }

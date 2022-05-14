@@ -48,5 +48,7 @@ public enum ClientEvent
     NORTHMIDDENMOVE,
     NORTHLEFTMOVE,
     NORTHRIGHTMOVE,
+    STAPCHANGE,
+    GAMESTART,
 }
 

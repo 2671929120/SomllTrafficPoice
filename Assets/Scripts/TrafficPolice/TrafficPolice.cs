@@ -115,9 +115,18 @@ public class TrafficPolice : MonoBehaviour
             //MoveEvent?.Invoke();
             Debug.Log("结束动作可以继续点击");
              GameManager.Instance.CanTouch = true;
-           
-           
-            //MoveEvent = null;
+             GameManager.Instance.GameStap -= 1;
+          
+            if (GameManager.Instance.GameStap < 0)
+            {
+                EventManager.Instance.TriggerEvent(ClientEvent.GAMEOVER);
+            }
+            else
+            {
+                EventManager.Instance.TriggerEvent(ClientEvent.STAPCHANGE);
+            }
+
+
         }
     }
     public void MiddonAnim(float angle)

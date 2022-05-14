@@ -24,11 +24,18 @@ public class GameManager : Singleton<GameManager>
     public bool GameOver;
     internal List<GameObject> TipsList =new List<GameObject>();
     internal int CameTime=0;
+    public int GameStap = 0;
+    internal int GameLevel;
 
     public void AddGameSouce(int num)
     {
         GameSouce += num;
         EventManager.Instance.TriggerEvent(ClientEvent.SOUCECHANGE);
+    }
+
+    public void  GameDataInit(int num)
+    {
+        GameStap = num;
     }
 
 

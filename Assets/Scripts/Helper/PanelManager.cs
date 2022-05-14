@@ -35,9 +35,20 @@ using UnityEngine;
            // pop.SetAsLastSibling();
             Transform tip = canvas.Find("Tip");
      
+        if (!layers.ContainsKey(Layer.Panel))
+        {
             layers.Add(Layer.Panel, panel);
+        }
+        if (!layers.ContainsKey(Layer.Pop))
+        {
             layers.Add(Layer.Pop, pop);
+        }
+        if (!layers.ContainsKey(Layer.Tip))
+        {
             layers.Add(Layer.Tip, tip);
+        }
+          
+           
         }
 
         //打开面板
