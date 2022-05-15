@@ -8,6 +8,8 @@ public class PlayerClick : MonoBehaviour
     public Shader shaderRed;
     public Shader shaderGreen;
     public bool canTouch;//判断是否可以触摸
+    private float t1 = 0;
+    private float t2 =1;
     void Start()
     {
         
@@ -16,26 +18,34 @@ public class PlayerClick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0)&& GameManager.Instance.CanTouch)
         {
-            //射线检测
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            t2= Time.realtimeSinceStartup;
+            if (t2- t1 < 0.2f)
             {
-                if (hit.collider.tag == "letgo")
+
+
+                //射线检测
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                     TriggerCar(hit.collider.name);
-                    if (hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader == shaderRed)
+                    if (hit.collider.tag == "letgo")
                     {
-                        hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader = shaderGreen;
+                        TriggerCar(hit.collider.name);
+                        if (hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader == shaderRed)
+                        {
+                            hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader = shaderGreen;
+                        }
+                        else
+                        {
+                            hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader = shaderRed;
+                        }
                     }
-                    else
-                    {
-                        hit.collider.gameObject.transform.GetComponent<MeshRenderer>().material.shader = shaderRed;
-                    } 
                 }
             }
+            t1 = t2;
         } 
     }
 

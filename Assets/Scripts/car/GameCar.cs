@@ -33,11 +33,15 @@ public class GameCar : MonoBehaviour
     {
         StartCoroutine(InitGame());
     }
+    public void OnDestroy()
+    {
+        EventManager.Instance.RemoveEvent(ClientEvent.GAMESTART, GameStart);
+    }
 
 
     IEnumerator InitGame()
     {
-        Dictionary<int, List<string>> dis = Config.AllLevelConfig[GameManager.Instance.GameLevel - 1];
+        Dictionary<int, List<string>> dis = Config.AllLevelConfig[GameManager.Instance.GameLevel];
         while (GameManager.Instance.CameTime < 120)
         {
             yield return new WaitForSeconds(1);
@@ -51,12 +55,14 @@ public class GameCar : MonoBehaviour
                     if(strs[0]== "Tips")
                     {
                         EventManager.Instance.TriggerEvent<string>(ClientEvent.TIPSSHOW, strs[1]);
-                       
-                                          
+                
                     }else if (strs[0] == "Stap")
                     {
                         GameManager.Instance.GameStap = int.Parse(strs[1].ToString());
                         EventManager.Instance.TriggerEvent(ClientEvent.STAPCHANGE);
+                    }else if (strs[0] == "AllCar")
+                    {
+                        GameManager.Instance.AllCarCount = int.Parse(strs[1].ToString());
                     }
                     else
                     {

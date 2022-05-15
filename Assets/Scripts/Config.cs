@@ -10,7 +10,8 @@ public class Config
     public static Dictionary<int, List<string>> ConfigFirstLevel = new Dictionary<int, List<string>>
     {
         { 1 ,new List<string> {
-            "Stap_30",
+            "AllCar_2",
+            "Stap_20",
             "WestRightInit_2", "WestMiddleInit_2", "WestLeftInit_2" ,
             "EastRightInit_2", "EastMiddleInit_2", "EastLeftInit_2" ,
             "NorthRightInit_2", "NorthMiddleInit_2", "NorthLeftInit_2" ,

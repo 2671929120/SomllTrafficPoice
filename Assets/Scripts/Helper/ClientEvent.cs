@@ -50,6 +50,6 @@ public enum ClientEvent
     NORTHMIDDENMOVE,
     NORTHLEFTMOVE,
     NORTHRIGHTMOVE,
-
+    CHACKVICTORY,
 }
 

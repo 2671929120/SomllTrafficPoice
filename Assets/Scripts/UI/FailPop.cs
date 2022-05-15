@@ -58,6 +58,10 @@ public class FailPop : BasePanel
         GameManager.Instance.GameAgain();
         SceneManager.LoadScene("GameMain");
         Time.timeScale = 1;
+        TimeTool.Instance.Delay(0.5f, () =>
+        {
+            EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
+        });
     }
 
     private void BackBtnClick()

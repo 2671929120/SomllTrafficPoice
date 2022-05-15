@@ -121,6 +121,8 @@ public class TrafficPolice : MonoBehaviour
             if (GameManager.Instance.GameStap < 0)
             {
                 EventManager.Instance.TriggerEvent(ClientEvent.GAMEOVER);
+                object[] obj = { "步数不足，指挥失败", true };
+                PanelManager.Open<FailPop>(obj);
             }
             else
             {

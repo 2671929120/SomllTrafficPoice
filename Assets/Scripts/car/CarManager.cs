@@ -109,7 +109,16 @@ public class CarManager : Singleton<CarManager>
     {
         if (WestLeftList.Count > 0)
         {
-            WestLeftList[0].Move();
+            int index = 0;
+            while(index< WestLeftList.Count)
+            {
+                if (WestLeftList[index] != null)
+                {
+                    WestLeftList[index].Move();
+                    break;
+                }
+            }
+
         }
     }
     public void WestMiddleMoveEventStart()

@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     internal int CameTime=0;
     public int GameStap = 0;
     internal int GameLevel;
+    internal int AllCarCount;
 
     public void AddGameSouce(int num)
     {
@@ -58,6 +59,22 @@ public class GameManager : Singleton<GameManager>
             }
 
         }
+
+        CarManager.Instance.EastLeftList.Clear();
+        CarManager.Instance.EastRightList.Clear();
+        CarManager.Instance.EastMiddleList.Clear();
+
+        CarManager.Instance.WestLeftList.Clear();
+        CarManager.Instance.WestRightList.Clear();
+        CarManager.Instance.WestMiddleList.Clear();
+
+        CarManager.Instance.NorthLeftList.Clear();
+        CarManager.Instance.NorthRightList.Clear();
+        CarManager.Instance.NorthMiddleList.Clear();
+
+        CarManager.Instance.SouthLeftList.Clear();
+        CarManager.Instance.SouthRightList.Clear();
+        CarManager.Instance.SouthMiddleList.Clear();
     }
 
 }

@@ -109,6 +109,7 @@ public class CarBase : MonoBehaviour
         //将管理器中的实例移除掉
         CarManager.Instance.DestoryCar(carType, this);
         EventManager.Instance.TriggerEvent<int>(ClientEvent.SOUCETEXT, type);
+        EventManager.Instance.TriggerEvent(ClientEvent.CHACKVICTORY);
         
         GameObject.Destroy(Car);
     }
@@ -135,7 +136,7 @@ public class CarBase : MonoBehaviour
             {
                 EventManager.Instance.TriggerEvent(ClientEvent.GAMEOVER);
                 GameManager.Instance.GameOver = true;
-                PanelManager.Open<FailPop>();
+                PanelManager.Open<FailPop>("发生意外，闯关失败！");
             }
             else
             {

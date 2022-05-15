@@ -41,13 +41,8 @@ class GameVictorylPop:BasePanel
     public override void OnShow(params object[] para)
     {
         base.OnShow(para);
-        if (para == null) return;
-        string textDes = para[0].ToString();
-        txtDes.text = textDes;
-        if (para.Length == 2)
-        {
-            imgIcon.gameObject.SetActive(false);
-        }
+        if (para.Length<= 0) return;
+      
 
 
     }
@@ -64,8 +59,11 @@ class GameVictorylPop:BasePanel
         {
             GameManager.Instance.GameLevel += 1;
         }
-
         Time.timeScale = 1;
+        TimeTool.Instance.Delay(0.5f, () =>
+        {
+            EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
+        });
     }
 
     private void BackBtnClick()

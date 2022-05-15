@@ -10,6 +10,7 @@ public class GameMainPanel : BasePanel
     private Button TestBtn;
     private Text txtTime;
     private Text txtStap;
+    private Text txtLevel;
 
     public Image imgJianTou;
     public override void OnConfig()
@@ -28,6 +29,7 @@ public class GameMainPanel : BasePanel
         base.OnInit();
 
         souceTest = skinRoot.gameObject.transform.Find("Text").GetComponent<Text>();
+        txtLevel = skinRoot.gameObject.transform.Find("txtLevel").GetComponent<Text>();
         txtStap = skinRoot.gameObject.transform.Find("txtStap").GetComponent<Text>();
         txtTime = skinRoot.gameObject.transform.Find("txtTime").GetComponent<Text>();
         changeViewButton = skinRoot.gameObject.transform.Find("ChangeView").GetComponent<Button>();
@@ -43,6 +45,7 @@ public class GameMainPanel : BasePanel
         EventManager.Instance.AddEvent(ClientEvent.TIMESHOW,TimeShow); 
         EventManager.Instance.AddEvent(ClientEvent.GAMEOVER,GameOver);
         EventManager.Instance.AddEvent(ClientEvent.STAPCHANGE,StapChange);
+        EventManager.Instance.AddEvent(ClientEvent.CHACKVICTORY,CheckVictory);
 
     }
     /// <summary>
@@ -56,8 +59,10 @@ public class GameMainPanel : BasePanel
         if (para == null) return;
         int LevelNum = int.Parse(para[0].ToString());
         GameManager.Instance.GameLevel = LevelNum;
+        txtLevel.text = "关卡" + LevelNum;
+        souceTest.text = "分数:" + GameManager.Instance.GameSouce;
        // EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
-        TimeTool.Instance.Delay(1f, () =>
+        TimeTool.Instance.Delay(0.5f, () =>
         {
            EventManager.Instance.TriggerEvent(ClientEvent.GAMESTART);
         } );
@@ -76,10 +81,19 @@ public class GameMainPanel : BasePanel
         EventManager.Instance.RemoveEvent(ClientEvent.GAMEOVER, GameOver);
         EventManager.Instance.RemoveEvent(ClientEvent.STAPCHANGE, StapChange);
     }
+
+
+    private void CheckVictory()
+    {
+        GameManager.Instance.AllCarCount -= 1;
+        if (GameManager.Instance.AllCarCount == 0)
+        {
+            PanelManager.Open<GameVictorylPop>();
+        }
+    }
     private void GameOver()
     {
-        object[] obj = { "步数不足，指挥失败", true};
-        PanelManager.Open<FailPop>(obj);
+       
     }
 
     private void StapChange()

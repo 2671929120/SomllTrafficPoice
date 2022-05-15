@@ -38,11 +38,14 @@ class LevelPanel : BasePanel
                 if (temp >= Config.AllLevelConfig.Count) break;
                 GameObject textObj = ResManager.LoadUIPrefab("LevelItem");
                 GameObject text = Instantiate(textObj, Content.transform);
+                text.name = "按钮_" + (temp+1);
                 text.transform.localPosition = new Vector3(-500+j *500f, -150+i*-350f, 0);
                 Button item = text.transform.GetComponent<Button>();
+                
                 item.transform.Find("Text").GetComponent<Text>().text = "关卡" + (temp + 1);
                 item.onClick.AddListener(() => {
-                    PanelManager.Open<JionGamePanel>(1 + 1);
+                    int num =int.Parse( item.name.Split('_')[1].ToString());
+                    PanelManager.Open<JionGamePanel>(num);
                     PanelManager.Close("LevelPanel");
 
                 });
