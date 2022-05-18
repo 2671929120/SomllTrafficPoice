@@ -10,7 +10,7 @@ public class Config
     public static Dictionary<int, List<string>> ConfigFirstLevel = new Dictionary<int, List<string>>
     {
         { 1 ,new List<string> {
-            "AllCar_2",
+            "AllCar_50",
             "Stap_20",
             "WestRightInit_2", "WestMiddleInit_2", "WestLeftInit_2" ,
             "EastRightInit_2", "EastMiddleInit_2", "EastLeftInit_2" ,
@@ -19,8 +19,9 @@ public class Config
 
         { 2  , new List<string>  {"Tips_各方车道开始通行" } },
         { 18 , new List<string> {"Tips_西方车道迎来高峰期", "WestLeftInit_10" , "WestRightInit_10" } },
-        { 30 , new List<string> { "Tips_北方车道迎来高峰期", "NorthMiddleInit_10", "NorthLeftInit_10", "NorthRightInit_10" } },
-        { 60 , new List<string> {"Tips_西方车道迎来高峰期", "WestLeftInit_10" , "WestRightInit_10" } },
+        { 45 , new List<string>{ "Tips_最后一波"} },
+        { 50 , new List<string> { "Tips_北方车道迎来高峰期", "NorthMiddleInit_10", "NorthLeftInit_10", "NorthRightInit_10" } },
+     
 
     };
     public int WestLeftCarCount = 10;
@@ -30,6 +31,7 @@ public class Config
     public static Dictionary<int, List<string>> ConfigSecondLevel = new Dictionary<int, List<string>>
     {
         { 1 ,new List<string> {
+            "AllCar_96",
             "Stap_30",
             "WestRightInit_5", "WestMiddleInit_5", "WestLeftInit_5" ,
             "EastRightInit_5", "EastMiddleInit_5", "EastLeftInit_5" ,

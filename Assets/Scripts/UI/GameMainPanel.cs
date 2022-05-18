@@ -99,6 +99,8 @@ public class GameMainPanel : BasePanel
     private void StapChange()
     {
         txtStap.text ="剩余步数:"+ GameManager.Instance.GameStap.ToString();
+
+        txtLevel.text = "关卡" + GameManager.Instance.GameLevel;
     }
 
     private void TimeShow()

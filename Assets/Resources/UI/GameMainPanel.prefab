@@ -3469,7 +3469,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 4.99
-  m_Text: 
+  m_Text: "\u5269\u4F59\u6B65\u6570:"
 --- !u!1 &7793175164660806251
 GameObject:
   m_ObjectHideFlags: 0
@@ -3773,8 +3773,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 518.99994, y: 421}
-  m_SizeDelta: {x: 99.95, y: 106.24}
+  m_AnchoredPosition: {x: 519, y: 421.01}
+  m_SizeDelta: {x: 157.5, y: 106.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5252698280707467136
 CanvasRenderer:
@@ -3817,4 +3817,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 4.99
-  m_Text: 
+  m_Text: 1
